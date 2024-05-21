@@ -8,6 +8,7 @@ import java.util.Set;
 
 @Entity(name = "Users")
 public class CustomUser {
+
     @Id
     @GeneratedValue
     private Long id;
@@ -18,11 +19,14 @@ public class CustomUser {
     private String email;
     private String password;
 
-
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
     private Set<PlacedOrder> placedOrders;
+
+    @OneToMany(mappedBy = "owner")
+    @JsonManagedReference
+    private Set<Giftcard> giftcards;
+
     public CustomUser() {
     }
 
@@ -91,4 +95,3 @@ public class CustomUser {
         return id;
     }
 }
-
