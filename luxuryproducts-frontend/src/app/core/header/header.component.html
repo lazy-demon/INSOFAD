@@ -2,13 +2,16 @@
   <div class="container">
     <a [routerLink]="['/']" class="navbar-brand me-auto">Gaming Webshop</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item">
           <a [routerLink]="['/']" class="nav-link rounded-3">Home</a>
+        </li>
+        <li class="nav-item" *ngIf="userIsLoggedIn">
+          <a [routerLink]="['giftcards']" class="nav-link rounded-3">Giftcards</a>
         </li>
         <li class="nav-item">
           <a [routerLink]="['products']" class="nav-link rounded-3">Products</a>
