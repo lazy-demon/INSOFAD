@@ -1,0 +1,12 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "driver": "PostgreSQL",
+            "connectString": "postgresql://postgres:nARQuSbnobrqqPFZMuASHtSrZikBexxX@roundhouse.proxy.rlwy.net:25070/railway",
+            "name": "INSOFAD"
+        }
+    ]
+}
