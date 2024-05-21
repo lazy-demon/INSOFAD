@@ -1,0 +1,49 @@
+:host {
+  display: block;
+}
+
+.btn {
+  background-color: black;
+  border: 1px solid black;
+  font-size: 15px;
+  color: white;
+
+  &:hover {
+    background-color: white;
+    color: black;
+  }
+}
+
+.card-img-top {
+  object-fit: cover;
+  height: 240px;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.card {
+  width: 100%;
+  /* Adjust as needed */
+  height: 200px;
+  /* Adjust as needed */
+  background-color: grey;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: Arial, sans-serif;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-number {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
