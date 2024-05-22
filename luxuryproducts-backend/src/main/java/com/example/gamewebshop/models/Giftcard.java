@@ -1,12 +1,8 @@
 package com.example.gamewebshop.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Giftcard {
@@ -17,21 +13,17 @@ public class Giftcard {
     private double balance;
     private String code;
     private String pin;
-
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JsonBackReference
-    private CustomUser owner;
+    private String owner_id;
 
     public Giftcard() {
     }
 
-    public Giftcard(CustomUser owner, String code, double balance, String pin) {
+    public Giftcard(String code, double balance, String pin) {
         this.code = code;
         this.balance = balance;
         this.pin = pin;
     }
 
-    // getters and setters for each variable
     public long getId() {
         return id;
     }
@@ -64,11 +56,11 @@ public class Giftcard {
         this.pin = pin;
     }
 
-    public CustomUser getOwner() {
-        return owner;
+    public String getOwner_id() {
+        return owner_id;
     }
 
-    public void setOwner(CustomUser owner) {
-        this.owner = owner;
+    public void setOwner_id(String owner_id) {
+        this.owner_id = owner_id;
     }
 }

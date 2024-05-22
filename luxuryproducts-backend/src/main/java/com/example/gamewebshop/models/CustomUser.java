@@ -1,10 +1,15 @@
 package com.example.gamewebshop.models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity(name = "Users")
 public class CustomUser {
@@ -12,7 +17,6 @@ public class CustomUser {
     @Id
     @GeneratedValue
     private Long id;
-
     private String name;
     private String infix;
     private String lastName;
@@ -22,10 +26,6 @@ public class CustomUser {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
     private Set<PlacedOrder> placedOrders;
-
-    @OneToMany(mappedBy = "owner")
-    @JsonManagedReference
-    private Set<Giftcard> giftcards;
 
     public CustomUser() {
     }
