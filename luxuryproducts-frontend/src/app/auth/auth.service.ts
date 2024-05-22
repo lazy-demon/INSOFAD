@@ -1,10 +1,10 @@
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {AuthResponse} from './auth-response.model';
-import {BehaviorSubject, Observable, tap} from 'rxjs';
-import {AuthRequest} from './auth-request.model';
-import {TokenService} from './token.service';
-import {environment} from "../../environments/environment";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { AuthResponse } from './auth-response.model';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { AuthRequest } from './auth-request.model';
+import { TokenService } from './token.service';
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +43,14 @@ export class AuthService {
           this.$userIsLoggedIn.next(true);
         })
       );
+  }
+
+  public getCurrentUserId(): string {
+    const token = this.tokenService.loadToken();
+    if (token) {
+      return this.tokenService.getPayload(token).email;
+    }
+    return '';
   }
 
   public logOut(): void {

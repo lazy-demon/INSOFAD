@@ -28,7 +28,7 @@ export const routes: Routes = [
   { path: 'order-history', component: OrderHistoryComponent, canActivate: [authGuard] },
   { path: 'paymentsuccessful', component: PaymentSuccessfulComponent, canActivate: [authGuard] },
   { path: 'orders', component: OrderComponent, canActivate: [authGuard] },
-  { path: 'giftcards', component: GiftcardComponent },
+  { path: 'giftcards', component: GiftcardComponent, canActivate: [authGuard] },
 
 ];
 
