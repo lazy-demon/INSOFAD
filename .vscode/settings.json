@@ -5,7 +5,7 @@
             "previewLimit": 50,
             "server": "localhost",
             "driver": "PostgreSQL",
-            "connectString": "postgresql://postgres:nARQuSbnobrqqPFZMuASHtSrZikBexxX@roundhouse.proxy.rlwy.net:25070/railway",
+            "connectString": "postgresql://postgres:UwEnZdqGfWsXKirSlUwJaXpBCtrBwxPn@monorail.proxy.rlwy.net:35133/railway",
             "name": "INSOFAD"
         }
     ]
