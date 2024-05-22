@@ -60,7 +60,7 @@
         <form>
           <div class="mb-3">
             <label for="giftcard-amount" class="form-label">Gift Card Amount</label>
-            <select class="form-control" id="giftcard-amount" required>
+            <select class="form-control" id="giftcard-amount" required #giftcardAmount>
               <option value="">Select amount</option>
               <option value="25">$25</option>
               <option value="50">$50</option>
@@ -68,7 +68,8 @@
               <option value="200">$200</option>
             </select>
           </div>
-          <button type="submit" class="btn btn-primary">Buy Gift Card</button>
+          <button type="button" class="btn btn-primary"
+            (click)="buyGiftcard(giftcardAmount.value); $event.preventDefault()">Buy Gift Card</button>
         </form>
       </div>
     </div>
