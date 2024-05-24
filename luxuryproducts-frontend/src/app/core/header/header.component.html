@@ -13,6 +13,9 @@
         <li class="nav-item" *ngIf="userIsLoggedIn">
           <a [routerLink]="['giftcards']" class="nav-link rounded-3">Giftcards</a>
         </li>
+        <li class="nav-item" *ngIf="userIsAdmin">
+          <a [routerLink]="['giftcardAdmin']" class="nav-link rounded-3">Giftcards Management</a>
+        </li>
         <li class="nav-item">
           <a [routerLink]="['products']" class="nav-link rounded-3">Products</a>
         </li>

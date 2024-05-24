@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { Giftcard } from '../models/giftcard.model';
 import { GiftcardService } from '../services/giftcard.service';
 import { AuthService } from '../auth/auth.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-giftcard',
@@ -25,29 +26,42 @@ import { AuthService } from '../auth/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GiftcardComponent implements OnInit {
-  giftcards: Giftcard[];
-  constructor(private giftcardService: GiftcardService, private authService: AuthService) { }
+  giftcards: Giftcard[] = [];
+  randomValue: number;
+  accountbalance: number;
 
-  ngOnInit(): void {
+  constructor(private giftcardService: GiftcardService, private authService: AuthService, private userService: UserService) { }
+
+  getGiftcards(): void {
     this.giftcardService.getGiftcards().subscribe(giftcards => {
       this.giftcards = giftcards;
     });
   }
 
+  ngOnInit(): void {
+    this.giftcardService.getGiftcards().subscribe(giftcards => {
+      this.giftcards = giftcards;
+    });
+
+    this.userService.getUserByEmail().subscribe(user => {
+      this.accountbalance = user.balance;
+    });
+  }
+
   buyGiftcard(amount: string) {
+    // if randomValue has more or less then 16 digits, generate a new one. 
+    this.randomValue = Number(String(Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000) + String(Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000));
+    while (String(this.randomValue).length !== 16) {
+      this.randomValue = Number(String(Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000) + String(Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000));
+    }
+
+
     const newGiftcard = new Giftcard();
     newGiftcard.balance = Number(amount);
-    newGiftcard.owner_id = this.authService.getCurrentUserId();
-    newGiftcard.code = Number(String(Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000) + String(Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000));
+    newGiftcard.boughtById = this.authService.getCurrentUserId();
+    newGiftcard.code = this.randomValue;
     newGiftcard.pin = (Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000)
-
-    this.giftcardService.addGiftcard(newGiftcard).subscribe(
-      (response) => {
-        console.log('Giftcard purchased successfully');
-      },
-      (error) => {
-        console.log('Error purchasing giftcard', error);
-      }
-    );
+    newGiftcard.created_at = new Date();
+    this.giftcardService.createGiftcard(newGiftcard)
   }
 }

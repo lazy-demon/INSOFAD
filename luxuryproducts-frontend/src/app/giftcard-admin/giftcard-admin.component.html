@@ -1,0 +1,27 @@
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Balance</th>
+        <th>Code</th>
+        <th>Pin</th>
+        <th>Bought By</th>
+        <th>Used By</th>
+        <th>Created At</th>
+        <th>Actions</th>
+    </tr>
+    <tr *ngFor="let giftcard of giftcards">
+        <td>{{ giftcard.id }}</td>
+        <td>{{ giftcard.balance }}</td>
+        <td>{{ giftcard.code }}</td>
+        <td>{{ giftcard.pin }}</td>
+        <td>{{ giftcard.boughtById }}</td>
+        <td>{{ giftcard.usedById }}</td>
+        <td>{{ giftcard.created_at }}</td>
+        <td>
+            <ng-container>
+                <button (click)="deleteGiftcard(giftcard.id)">Delete</button>
+                <!-- Add buttons for editing and updating here -->
+            </ng-container>
+        </td>
+    </tr>
+</table>

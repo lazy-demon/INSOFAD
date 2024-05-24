@@ -22,6 +22,7 @@ public class CustomUser {
     private String lastName;
     private String email;
     private String password;
+    private long balance;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -93,5 +94,13 @@ public class CustomUser {
 
     public Long getId() {
         return id;
+    }
+
+    public long getBalance() {
+        return balance;
+    }
+
+    public void setBalance(long balance) {
+        this.balance = balance;
     }
 }

@@ -12,6 +12,7 @@ import { OrderComponent } from "./order/order.component";
 import { PaymentSuccessfulComponent } from "./order/payment-successful/payment-successful.component";
 import { OrderHistoryComponent } from './profile/order-history/order-history.component';
 import { GiftcardComponent } from './giftcard/giftcard.component';
+import { GiftcardAdminComponent } from './giftcard-admin/giftcard-admin.component';
 
 
 export const routes: Routes = [
@@ -29,7 +30,7 @@ export const routes: Routes = [
   { path: 'paymentsuccessful', component: PaymentSuccessfulComponent, canActivate: [authGuard] },
   { path: 'orders', component: OrderComponent, canActivate: [authGuard] },
   { path: 'giftcards', component: GiftcardComponent, canActivate: [authGuard] },
-
+  { path: 'giftcardAdmin', component: GiftcardAdminComponent, canActivate: [authGuard] },
 ];
 
 

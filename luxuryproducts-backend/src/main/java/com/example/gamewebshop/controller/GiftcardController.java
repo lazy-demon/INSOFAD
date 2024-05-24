@@ -62,7 +62,11 @@ public class GiftcardController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteById(@PathVariable Long id) {
         this.giftcardDAO.deleteById(id);
-        return ResponseEntity.ok("Giftcard deleted with id " + id);
+
+        MultiValueMap<String, String> headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+
+        return new ResponseEntity<>("{\"message\": \"Giftcard deleted with id " + id + "\"}", headers, HttpStatus.OK);
     }
 
 }

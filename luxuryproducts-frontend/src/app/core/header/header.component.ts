@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../auth/auth.service';
-import {Router} from '@angular/router';
-import {CartService} from "../../services/cart.service";
-import {Product} from "../../models/product.model";
-import {User} from "../../models/user.model";
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../auth/auth.service';
+import { Router } from '@angular/router';
+import { CartService } from "../../services/cart.service";
+import { Product } from "../../models/product.model";
+import { User } from "../../models/user.model";
 
 @Component({
   selector: 'app-header',
@@ -12,6 +12,7 @@ import {User} from "../../models/user.model";
 })
 export class HeaderComponent implements OnInit {
 
+  public userIsAdmin: boolean = false;
   public userIsLoggedIn: boolean = false;
   public isDropdownOpen: boolean = false;
   public amountOfProducts: number = 0;
@@ -21,6 +22,7 @@ export class HeaderComponent implements OnInit {
 
   public ngOnInit(): void {
     this.checkLoginState();
+    this.checkAdminState();
     this.cartService.$productInCart.subscribe((products: Product[]) => {
       this.amountOfProducts = products.reduce((total, product) => total + product.amount, 0);
 
@@ -38,6 +40,15 @@ export class HeaderComponent implements OnInit {
       .$userIsLoggedIn
       .subscribe((loginState: boolean) => {
         this.userIsLoggedIn = loginState;
+      });
+  }
+
+  public checkAdminState(): void {
+
+    this.authService
+      .$userIsAdmin
+      .subscribe((loginState: boolean) => {
+        this.userIsAdmin = loginState;
       });
   }
 

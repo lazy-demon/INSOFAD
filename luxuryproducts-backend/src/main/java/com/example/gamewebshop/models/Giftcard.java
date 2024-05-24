@@ -1,5 +1,7 @@
 package com.example.gamewebshop.models;
 
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -13,7 +15,9 @@ public class Giftcard {
     private double balance;
     private String code;
     private String pin;
-    private String owner_id;
+    private String boughtById;
+    private String usedById;
+    private Date created_at;
 
     public Giftcard() {
     }
@@ -22,6 +26,8 @@ public class Giftcard {
         this.code = code;
         this.balance = balance;
         this.pin = pin;
+        this.created_at = new Date();
+        // this.boughtById = 
     }
 
     public long getId() {
@@ -56,11 +62,27 @@ public class Giftcard {
         this.pin = pin;
     }
 
-    public String getOwner_id() {
-        return owner_id;
+    public String getboughtById() {
+        return boughtById;
     }
 
-    public void setOwner_id(String owner_id) {
-        this.owner_id = owner_id;
+    public void setboughtById(String boughtById) {
+        this.boughtById = boughtById;
+    }
+
+    public String getUsedById() {
+        return usedById;
+    }
+
+    public void setUsedById(String usedById) {
+        this.usedById = usedById;
+    }
+
+    public Date getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
     }
 }

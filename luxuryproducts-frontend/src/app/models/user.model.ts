@@ -4,5 +4,6 @@ export class User {
   public infix: string;
   public lastName: string;
   public email: string;
+  public balance: number;
   //public token: string;
 }

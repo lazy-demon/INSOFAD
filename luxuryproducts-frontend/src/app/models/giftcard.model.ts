@@ -3,6 +3,8 @@ export class Giftcard {
   balance: number;
   code: number;
   pin: number;
-  owner_id: string;
+  boughtById: string;
+  usedById: string;
+  created_at: Date;
   // Add other properties as needed
 }

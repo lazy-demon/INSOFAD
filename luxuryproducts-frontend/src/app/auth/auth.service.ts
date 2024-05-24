@@ -15,13 +15,23 @@ export class AuthService {
   private _registerEndpoint: string = this.base_url + '/auth/register';
 
   public $userIsLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public $userIsAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private tokenService: TokenService) {
     if (this.tokenService.isValid()) {
       this.$userIsLoggedIn.next(true);
+      this.$userIsAdmin.next(this.isAdmin());
     }
   }
 
+  private isAdmin(): boolean {
+    const token = this.tokenService.loadToken();
+    if (token) {
+      const payload = this.tokenService.getPayload(token).email;
+      return payload === 'admin@email.com'
+    }
+    return false;
+  }
 
   public login(authRequest: AuthRequest): Observable<AuthResponse> {
     return this.http
@@ -30,6 +40,7 @@ export class AuthService {
         tap((authResponse: AuthResponse) => {
           this.tokenService.storeToken(authResponse.token);
           this.$userIsLoggedIn.next(true);
+          this.$userIsAdmin.next(this.isAdmin());
         })
       );
   }
@@ -41,6 +52,7 @@ export class AuthService {
         tap((authResponse: AuthResponse) => {
           this.tokenService.storeToken(authResponse.token);
           this.$userIsLoggedIn.next(true);
+          this.$userIsAdmin.next(this.isAdmin());
         })
       );
   }
@@ -56,5 +68,6 @@ export class AuthService {
   public logOut(): void {
     this.tokenService.removeToken();
     this.$userIsLoggedIn.next(false);
+    this.$userIsAdmin.next(false);
   }
 }
