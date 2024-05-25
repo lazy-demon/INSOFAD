@@ -1,1 +1,2 @@
-TRUNCATE TABLE giftcard
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
