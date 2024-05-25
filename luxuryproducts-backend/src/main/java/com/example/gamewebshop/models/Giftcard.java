@@ -1,6 +1,9 @@
 package com.example.gamewebshop.models;
 
 import java.util.Date;
+import java.util.UUID;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,22 +16,12 @@ public class Giftcard {
     @GeneratedValue
     private long id;
     private double balance;
-    private String code;
+    private UUID code;
     private String pin;
-    private String boughtById;
-    private String usedById;
+    private long boughtById;
+    private long usedById;
+    @org.hibernate.annotations.CreationTimestamp
     private Date created_at;
-
-    public Giftcard() {
-    }
-
-    public Giftcard(String code, double balance, String pin) {
-        this.code = code;
-        this.balance = balance;
-        this.pin = pin;
-        this.created_at = new Date();
-        // this.boughtById = 
-    }
 
     public long getId() {
         return id;
@@ -46,11 +39,11 @@ public class Giftcard {
         this.balance = balance;
     }
 
-    public String getCode() {
+    public UUID getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(UUID code) {
         this.code = code;
     }
 
@@ -62,19 +55,19 @@ public class Giftcard {
         this.pin = pin;
     }
 
-    public String getboughtById() {
+    public long getBoughtById() {
         return boughtById;
     }
 
-    public void setboughtById(String boughtById) {
+    public void setBoughtById(long boughtById) {
         this.boughtById = boughtById;
     }
 
-    public String getUsedById() {
+    public long getUsedById() {
         return usedById;
     }
 
-    public void setUsedById(String usedById) {
+    public void setUsedById(long usedById) {
         this.usedById = usedById;
     }
 

@@ -24,12 +24,13 @@ export class GiftcardAdminComponent implements OnInit {
 
   getGiftcards() {
     this.giftcardService.getGiftcards().subscribe(giftcards => {
+      console.log(giftcards);
       this.giftcards = giftcards;
     });
   }
 
-  createGiftcard(giftcard: Giftcard) {
-    this.giftcardService.createGiftcard(giftcard)
+  createGiftcard(amount: number) {
+    this.giftcardService.createGiftcard(amount)
   }
 
   updateGiftcard(id: number, giftcard: Giftcard) {
@@ -39,8 +40,7 @@ export class GiftcardAdminComponent implements OnInit {
   }
 
   deleteGiftcard(id: number) {
-    this.giftcardService.deleteGiftcard(id).subscribe(() => {
-      this.getGiftcards();
-    });
+    this.giftcardService.deleteGiftcard(id);
+    this.getGiftcards();
   }
 }

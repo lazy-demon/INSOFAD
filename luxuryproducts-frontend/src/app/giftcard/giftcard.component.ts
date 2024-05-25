@@ -49,19 +49,6 @@ export class GiftcardComponent implements OnInit {
   }
 
   buyGiftcard(amount: string) {
-    // if randomValue has more or less then 16 digits, generate a new one. 
-    this.randomValue = Number(String(Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000) + String(Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000));
-    while (String(this.randomValue).length !== 16) {
-      this.randomValue = Number(String(Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000) + String(Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000));
-    }
-
-
-    const newGiftcard = new Giftcard();
-    newGiftcard.balance = Number(amount);
-    newGiftcard.boughtById = this.authService.getCurrentUserId();
-    newGiftcard.code = this.randomValue;
-    newGiftcard.pin = (Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000)
-    newGiftcard.created_at = new Date();
-    this.giftcardService.createGiftcard(newGiftcard)
+    this.giftcardService.createGiftcard(Number(amount))
   }
 }

@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.gamewebshop.dao.GiftcardDAO;
+import com.example.gamewebshop.dao.UserRepository;
+import com.example.gamewebshop.dto.CreateGiftcardDTO;
 import com.example.gamewebshop.models.Giftcard;
+import com.example.gamewebshop.services.GiftcardService;
 
 /**
  *
@@ -26,22 +29,25 @@ import com.example.gamewebshop.models.Giftcard;
 @RestController
 @CrossOrigin(origins = {"http://localhost:4200", "http://s1148232.student.inf-hsleiden.nl:18232"})
 @RequestMapping("/giftcards")
-public class GiftcardController {
+public class GiftcardController extends BaseController {
 
     private final GiftcardDAO giftcardDAO;
+    private final GiftcardService service;
 
-    public GiftcardController(GiftcardDAO giftcardDAO) {
+    public GiftcardController(UserRepository userRepository, GiftcardService service, GiftcardDAO giftcardDAO) {
+        super(userRepository);
         this.giftcardDAO = giftcardDAO;
+        this.service     = service;
     }
 
     @PostMapping()
-    public ResponseEntity<String> createGiftcard(@RequestBody Giftcard giftcard) {
-        this.giftcardDAO.createGiftcard(giftcard);
+    public ResponseEntity<Giftcard> createGiftcard(@RequestBody CreateGiftcardDTO request) {
+        Giftcard giftcard = this.service.createGiftcard(request.getBalance(), this.getAuthenticatedUser());
 
         MultiValueMap<String, String> headers = new HttpHeaders();
         headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
 
-        return new ResponseEntity<>("{\"message\": \"Giftcard created\"}", headers, HttpStatus.OK);
+        return new ResponseEntity<>(giftcard, headers, HttpStatus.CREATED);
     }
 
     @GetMapping

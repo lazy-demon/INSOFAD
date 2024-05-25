@@ -35,8 +35,8 @@ public class GiftcardDAO {
     }
 
     @Transactional
-    public void createGiftcard(Giftcard giftcard) {
-        this.giftcardRepository.save(giftcard);
+    public Giftcard createGiftcard(Giftcard giftcard) {
+        return this.giftcardRepository.save(giftcard);
     }
 
     // public void updateGiftcard(GiftcardDTO giftcardDTO, Long id) {

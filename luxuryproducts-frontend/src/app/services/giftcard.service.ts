@@ -30,8 +30,8 @@ export class GiftcardService {
     return this.http.get<Giftcard>(`${this.apiUrl}/${id}`);
   }
 
-  createGiftcard(giftcard: Giftcard): void {
-    this.http.post<Giftcard>(this.apiUrl, giftcard).subscribe((newGiftcard: Giftcard) => {
+  createGiftcard(balance: number): void {
+    this.http.post<Giftcard>(this.apiUrl, { balance: balance }).subscribe((newGiftcard: Giftcard) => {
       const currentGiftcards = this._giftcards.getValue();
       this._giftcards.next([...currentGiftcards, newGiftcard]);
     });
@@ -41,8 +41,15 @@ export class GiftcardService {
     return this.http.put<Giftcard>(`${this.apiUrl}/${id}`, giftcard);
   }
 
-  deleteGiftcard(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  deleteGiftcard(id: number): void {
+    this.http.delete<void>(`${this.apiUrl}/${id}`).subscribe(() => {
+      const currentGiftcards = this._giftcards.getValue();
+      const updatedGiftcards = currentGiftcards.filter(giftcard => giftcard.id !== id);
+      this._giftcards.next(updatedGiftcards);
+    },
+    error => {
+      console.error(error);
+    });
   }
 
   private updateGiftcards(giftcard: Giftcard): void {
