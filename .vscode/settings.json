@@ -8,5 +8,6 @@
             "connectString": "postgresql://postgres:gfQRtoxsSpGDBNZosJxPwTJrtwdsJufo@monorail.proxy.rlwy.net:27241/railway",
             "name": "INSOFAD"
         }
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
